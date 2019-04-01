@@ -29,3 +29,12 @@ spring:
       settings:
         trace: false
         web-allow-others: false
+        
+# print sql parameter
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace

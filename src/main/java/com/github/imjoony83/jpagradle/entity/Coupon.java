@@ -1,7 +1,8 @@
 package com.github.imjoony83.jpagradle.entity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,21 +10,21 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Builder;
-import lombok.Data;
 
 @Entity
-@Table
-@Data
+@MappedSuperclass
+@Table(name="coupon")
 public class Coupon {
 
 	@Builder
-	public Coupon(String name, Date expire_date) {
+	public Coupon(String name, LocalDate expireDate) {
 		this.name = name;
-		this.expire_date = expire_date;
+		this.expireDate = expireDate;
 	}
 	
 	@Id
@@ -36,17 +37,18 @@ public class Coupon {
 	@Column(nullable=false, columnDefinition="char(1) default 'Y'")
 	private boolean isValid;
 	
-	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
-	private Date update_date;
+//	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
+	@Column(nullable=false)
+	private LocalDateTime updateDate;
 	
-	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
-	private Date insert_date;
+	@Column(nullable=false)
+	private LocalDateTime insertDate;
 	
-	@Column(nullable=false, columnDefinition="timestamp default CURRENT_DATE")
-	private Date expire_date;
+	@Column(nullable=false)
+	private LocalDate expireDate;
 	
 	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="coupon_id")
-	private Collection<Coupons> coupons;
+	@JoinColumn(name="couponId")
+	private Collection<CustomerCoupon> coupons;
 	
 }

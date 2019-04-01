@@ -1,7 +1,7 @@
 package com.github.imjoony83.jpagradle.entity;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,15 +9,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Builder;
-import lombok.Data;
 
 @Entity
-@Table
-@Data
+@MappedSuperclass
+@Table(name="customer")
 public class Customer {
 	
 	@Builder
@@ -41,13 +41,13 @@ public class Customer {
 	private int grade;
 	
 	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
-	private Date updateDate;
+	private LocalDateTime updateDate;
 	
 	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
-	private Date insertDate;
+	private LocalDateTime insertDate;
 	
 	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="customer_id")
-	private Collection<Coupons> coupons;
+	@JoinColumn(name="customerId")
+	private Collection<CustomerCoupon> CustomerCouponList;
 	
 }
