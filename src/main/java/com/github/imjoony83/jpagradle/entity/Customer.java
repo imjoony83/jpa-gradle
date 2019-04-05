@@ -16,9 +16,8 @@ import javax.persistence.Table;
 import lombok.Builder;
 
 @Entity
-@MappedSuperclass
 @Table(name="customer")
-public class Customer {
+public class Customer extends BaseEntity{
 	
 	@Builder
 	public Customer(String email, String name, int grade) {
@@ -40,14 +39,14 @@ public class Customer {
 	@Column(nullable=false, columnDefinition="int default 0")
 	private int grade;
 	
-	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
-	private LocalDateTime updateDate;
-	
-	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
-	private LocalDateTime insertDate;
+//	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
+//	private LocalDateTime updateDate;
+//
+//	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
+//	private LocalDateTime insertDate;
 	
 	@OneToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="customerId")
-	private Collection<CustomerCoupon> CustomerCouponList;
-	
+	private Collection<CustomerCoupon> customerCoupons;
+
 }

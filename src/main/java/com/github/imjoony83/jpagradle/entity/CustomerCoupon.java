@@ -12,11 +12,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.Builder;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@MappedSuperclass
-@Table(name="coupons")
-public class CustomerCoupon {
+@Table(name="customerCoupon")
+public class CustomerCoupon extends  BaseEntity{
 	
 	@Builder
 	public CustomerCoupon(long couponId, long customerId, LocalDateTime useDate) {
@@ -25,20 +25,16 @@ public class CustomerCoupon {
 		this.useDate = useDate;
 	}
 	
-	@Id
-	@GeneratedValue
-	private long id;
-	
 	@Column(nullable=false)
 	private long couponId;
 	
 	@Column(nullable=false)
 	private long customerId;
-	
+
 	@Column(nullable=false, columnDefinition="varchar(255) default 'N'")
 	private String isUsed;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@UpdateTimestamp
 	private LocalDateTime useDate;
 
 }

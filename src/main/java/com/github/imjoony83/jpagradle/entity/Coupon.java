@@ -14,12 +14,12 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.Builder;
 
 @Entity
-@MappedSuperclass
 @Table(name="coupon")
-public class Coupon {
+public class Coupon extends BaseEntity {
 
 	@Builder
 	public Coupon(String name, LocalDate expireDate) {
@@ -36,13 +36,6 @@ public class Coupon {
 	
 	@Column(nullable=false, columnDefinition="char(1) default 'Y'")
 	private boolean isValid;
-	
-//	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
-	@Column(nullable=false)
-	private LocalDateTime updateDate;
-	
-	@Column(nullable=false)
-	private LocalDateTime insertDate;
 	
 	@Column(nullable=false)
 	private LocalDate expireDate;

@@ -8,6 +8,6 @@ public class JpaGradleApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JpaGradleApplication.class, args);
-	}
+}
 
 }
