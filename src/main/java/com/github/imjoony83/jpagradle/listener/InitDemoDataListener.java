@@ -30,8 +30,9 @@ public class InitDemoDataListener implements ApplicationListener<ApplicationRead
         // faker.name();
 
         Arrays.asList(faker.name(), faker.name(), faker.name()).stream().forEach(name -> {
-            Customer customer = Customer.builder().name(name).email(name + "@mail.com").grade(0).build();
-            customerJpaRepository.save(customer);
+//            Customer customer - Customer.
+//            Customer customer = Customer.builder().name(name).email(name + "@mail.com").grade(0).build();
+//            customerJpaRepository.save(customer);
         });
 
         // add Coupon
