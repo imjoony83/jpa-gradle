@@ -26,9 +26,9 @@ public class Customer extends BaseEntity{
 		this.grade = grade;
 	}
 	
-	@Id
-	@GeneratedValue
-	private long id;
+//	@Id
+//	@GeneratedValue
+//	private long id;
 	
 	@Column(unique=true)
 	private String email;
@@ -45,8 +45,7 @@ public class Customer extends BaseEntity{
 //	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
 //	private LocalDateTime insertDate;
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="customerId")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "customerId")
 	private Collection<CustomerCoupon> customerCoupons;
 
 }

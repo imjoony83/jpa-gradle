@@ -2,16 +2,10 @@ package com.github.imjoony83.jpagradle.entity;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import lombok.Builder;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
@@ -19,20 +13,22 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class CustomerCoupon extends  BaseEntity{
 	
 	@Builder
-	public CustomerCoupon(long couponId, long customerId, LocalDateTime useDate) {
-		this.couponId = couponId;
-		this.customerId = customerId;
+	public CustomerCoupon(Coupon coupon, Customer customer, LocalDateTime useDate) {
+		this.coupontId = coupon;
+		this.customerId = customer;
 		this.useDate = useDate;
 	}
-	
-	@Column(nullable=false)
-	private long couponId;
-	
-	@Column(nullable=false)
-	private long customerId;
+
+	@ManyToOne
+	@JoinColumn(name ="coupon_id")
+	private Coupon coupontId;
+
+	@ManyToOne
+	@JoinColumn(name ="customer_id")
+	private Customer customerId;
 
 	@Column(nullable=false, columnDefinition="varchar(255) default 'N'")
-	private String isUsed;
+	private String used;
 
 	@UpdateTimestamp
 	private LocalDateTime useDate;

@@ -27,21 +27,20 @@ public class Coupon extends BaseEntity {
 		this.expireDate = expireDate;
 	}
 	
-	@Id
-	@GeneratedValue
-	private long id;
+//	@Id
+//	@GeneratedValue
+//	private long id;
 	
 	@Column(nullable=false)
 	private String name;
 	
 	@Column(nullable=false, columnDefinition="char(1) default 'Y'")
-	private boolean isValid;
+	private boolean valid;
 	
 	@Column(nullable=false)
 	private LocalDate expireDate;
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="couponId")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "coupontId")
 	private Collection<CustomerCoupon> coupons;
 	
 }
