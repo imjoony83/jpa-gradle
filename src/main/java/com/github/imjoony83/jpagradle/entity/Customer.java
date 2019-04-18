@@ -1,29 +1,22 @@
 package com.github.imjoony83.jpagradle.entity;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import com.github.imjoony83.jpagradle.constant.GradeType;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Entity
 @Table(name="customer")
 public class Customer extends BaseEntity{
 	
 	@Builder
-	public Customer(String email, String name, int grade) {
+	public Customer(String email, String name, GradeType gradeType) {
 		this.email = email;
 		this.name = name;
-		this.grade = grade;
+		this.gradeType = gradeType;
 	}
 	
 //	@Id
@@ -35,9 +28,10 @@ public class Customer extends BaseEntity{
 	
 	@Column(nullable=false)
 	private String name;
-	
-	@Column(nullable=false, columnDefinition="int default 0")
-	private int grade;
+
+	@Column(nullable=false)
+	@Enumerated(EnumType.STRING)
+	private GradeType gradeType;
 	
 //	@Column(nullable=false, columnDefinition="timestamp default CURRENT_TIMESTAMP")
 //	private LocalDateTime updateDate;

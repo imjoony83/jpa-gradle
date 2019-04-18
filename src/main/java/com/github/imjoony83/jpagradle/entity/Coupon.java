@@ -4,27 +4,23 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
+import com.github.imjoony83.jpagradle.constant.CouponStatus;
 import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Entity
 @Table(name="coupon")
 public class Coupon extends BaseEntity {
 
 	@Builder
-	public Coupon(String name, LocalDate expireDate) {
+	public Coupon(String name, LocalDate expireDate, CouponStatus status) {
 		this.name = name;
 		this.expireDate = expireDate;
+		this.status = status;
 	}
 	
 //	@Id
@@ -33,9 +29,10 @@ public class Coupon extends BaseEntity {
 	
 	@Column(nullable=false)
 	private String name;
-	
-	@Column(nullable=false, columnDefinition="char(1) default 'Y'")
-	private boolean valid;
+
+	@Column(nullable=false)
+	@Enumerated(EnumType.STRING)
+	private CouponStatus status;
 	
 	@Column(nullable=false)
 	private LocalDate expireDate;
