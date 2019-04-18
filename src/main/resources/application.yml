@@ -30,11 +30,14 @@ spring:
         trace: false
         web-allow-others: false
         
-# print sql parameter
-#logging:
-#  level:
-#    org:
-#      hibernate:
-#        type:
-#          descriptor:
-#            sql: trace
+# logging
+logging:
+  level:
+    ROOT: ERROR
+    org.springframework: ERROR
+    org.springframework.data: ERROR
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
