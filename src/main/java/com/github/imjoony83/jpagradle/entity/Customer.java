@@ -1,17 +1,17 @@
 package com.github.imjoony83.jpagradle.entity;
 
-import java.util.Collection;
-import javax.persistence.*;
-
 import com.github.imjoony83.jpagradle.constant.GradeType;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 
+import javax.persistence.*;
+import java.util.Collection;
+
 @RequiredArgsConstructor
 @Entity
 @Table(name="customer")
-public class Customer extends BaseEntity{
-	
+public class Customer extends BaseEntity {
+
 	@Builder
 	public Customer(String email, String name, GradeType gradeType) {
 		this.email = email;

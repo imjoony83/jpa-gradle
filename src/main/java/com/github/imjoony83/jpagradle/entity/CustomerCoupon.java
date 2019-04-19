@@ -1,17 +1,13 @@
 package com.github.imjoony83.jpagradle.entity;
 
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-
-import javax.persistence.*;
-
 import com.github.imjoony83.jpagradle.constant.CouponStatus;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.ManyToAny;
+import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Entity
@@ -33,6 +29,7 @@ public class CustomerCoupon extends BaseEntity{
 	@JoinColumn(name ="customer_id")
 	private Customer customerId;
 
+	@Setter
 	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
 	private CouponStatus status;
@@ -40,4 +37,13 @@ public class CustomerCoupon extends BaseEntity{
 	@UpdateTimestamp
 	private LocalDateTime useDate;
 
+	@Override
+	public String toString() {
+		return "CustomerCoupon{" +
+				"coupontId=" + coupontId +
+				", customerId=" + customerId +
+				", status=" + status +
+				", useDate=" + useDate +
+				'}';
+	}
 }
